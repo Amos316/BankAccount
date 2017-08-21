@@ -9,6 +9,7 @@ public class Account {
    private String desc; /*user -defined name*/
    
    public String getNbr() {
+	   
 	   return this.nbr;
    }
    private void setNbr(String nbr) {
