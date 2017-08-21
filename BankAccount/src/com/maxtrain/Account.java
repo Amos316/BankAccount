@@ -1,0 +1,89 @@
+package com.maxtrain;
+
+public class Account {
+  static int nextNbr = 1;
+//	private is for properties inside a class
+//	all the properties
+   private double balance; /*holds the amount in the account*/
+   private String nbr; /*accounts number*/
+   private String desc; /*user -defined name*/
+   
+   public String getNbr() {
+	   return this.nbr;
+   }
+   private void setNbr(String nbr) {
+	   this.nbr = nbr;
+   }
+   public String getDesc() {
+	   return this.desc;
+   }
+	   public void setDesc(String desc) {
+		   this.desc = desc;
+   }
+	   public double getBalance () {
+		   return this.balance;
+ }
+	   private void setBalance (double balance) {
+		   this.balance = balance;
+	   }
+   
+//   seting account desc to be able to be changed by customer
+//	   constructor
+   public Account(String desc) {
+	   this.setNbr(String.valueOf(nextNbr));
+	   nextNbr++;
+//	   this.desc = desc
+	   this.setDesc(desc);
+	   this.setBalance(0);
+	   
+   }
+   
+   
+//   constructor in java takes just name and name of the method.
+//   public Account(String desc) {
+//	   this.setNbr(string.valueOf(nextNbr));
+//	   nextNbr++;
+//	   
+//	   this.setDesc(desc);
+//	   this.setBalance(0);
+	   
+	   
+//	transfer function
+	   public Boolean transfer(double amount, Account toAccount) {
+		  if(this.getBalance() < amount || amount <= 0) {
+			  return false;
+		  }
+		   this.withdraw(amount);
+		   toAccount.deposit(amount);
+		   System.out.println("successful transfer of" + amount);
+		   return true;
+	   }
+	   
+   
+   public double deposit (double amount){
+	   if(amount <= 0) {
+		   System.out.println("Deposit amount must be greater than zero");
+		   return this.balance;
+	   }
+	   this.balance += amount;
+          return this.balance;
+   }   
+   
+   public double withdraw(double amount) {
+	   if(amount <= 0) {
+		   System.out.println("withdrawal amount must be greater than zero");
+       return this.balance;
+	   }
+	   if (amount > this.balance) {
+		   System.out.println("Insufficient funds!");
+		   return this.balance;
+	   }
+        this.balance -= amount;
+        return this.balance;
+   }
+   public String display () {
+	   return "Account: nbr is " + this.getNbr()
+	   + ", desc is " + this.getDesc()
+	   + ", balance is " + this.getBalance();
+	 }
+}
